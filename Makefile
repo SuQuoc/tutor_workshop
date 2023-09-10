@@ -26,7 +26,7 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 
 $(NAME): $(LIBFT) $(OBJS)
 	@echo "$(BYELLOW)Creating executable:$(NC)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline -lhistory -o $(NAME) 
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) 
 	@echo "$(GREEN)Executable \"$(NAME)\" succesfully created.$(NC)"
 
 $(LIBFT):

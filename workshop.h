@@ -12,6 +12,6 @@
 # include <unistd.h>
 
 
-# define BUF_SIZE 100000 
+# define BUF_SIZE 10 * 1000
 
 # endif
