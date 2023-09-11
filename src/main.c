@@ -25,6 +25,7 @@ int mem_limit(void)
 
 	ft_printf("CHOCOBOS !!!\n");
 
+	printf("buffer Size: %d\n", BUF_SIZE);
 	str = (char *)malloc(sizeof(char) * BUF_SIZE);
 	//if (!str)
 	//	return (1);
@@ -85,15 +86,15 @@ char **alloc_arr(int rows, int len)
 	int i;
 	
 	arr = malloc(sizeof(char *) * (rows + 1));
-	//if (!arr)
-	//	return (NULL);
+	if (!arr)
+		return (NULL);
 
 	i = 0;
 	while (i < rows)
 	{
 		arr[i] = malloc(sizeof(char) * (len + 1));
-		//if (!arr[i])
-		//	return (NULL);
+		if (!arr[i])
+			return (NULL);
 		arr[i][0] = '\0';
 		i++;
 	}

@@ -19,6 +19,8 @@ LIBFT 		= $(LIBFT_DIR)/libft.a
 .PHONY: all bonus clean fclean re aa aac va seelib norm normb
 all: $(OBJ_PATH) $(NAME)
 
+
+
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
 
@@ -34,21 +36,24 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 #General
+malloc_test: $(OBJS)
+	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJS} -L./libft/ -llibft -L. -lmallocator
+
 clean:
-	@rm -f val_suppression_file.txt
-	@rm -rf $(OBJ_PATH)
-	@echo "$(MAGENTA)Obj directory removed.$(NC)"
-	@$(MAKE) -C $(LIBFT_DIR) clean
-	@echo "$(MAGENTA)Make clean in directory "$(LIBFT_DIR)" invoked.$(NC)"
+	# @rm -f val_suppression_file.txt
+	# @rm -rf $(OBJ_PATH)
+	# @echo "$(MAGENTA)Obj directory removed.$(NC)"
+	# @$(MAKE) -C $(LIBFT_DIR) clean
+	# @echo "$(MAGENTA)Make clean in directory "$(LIBFT_DIR)" invoked.$(NC)"
 
 fclean:
-	@rm -f val_suppression_file.txt
-	@rm -rf $(OBJ_PATH)
-	@echo "$(MAGENTA)Obj directory removed.$(NC)"
-	@rm -f $(NAME)
-	@echo "$(MAGENTA)Deleted executable named: $(NAME)$(NC)"
-	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@echo "$(MAGENTA)Make fclean in directory "$(LIBFT_DIR)" invoked.$(NC)"
+	# @rm -f val_suppression_file.txt
+	# @rm -rf $(OBJ_PATH)
+	# @echo "$(MAGENTA)Obj directory removed.$(NC)"
+	# @rm -f $(NAME)
+	# @echo "$(MAGENTA)Deleted executable named: $(NAME)$(NC)"
+	# @$(MAKE) -C $(LIBFT_DIR) fclean
+	# @echo "$(MAGENTA)Make fclean in directory "$(LIBFT_DIR)" invoked.$(NC)"
 
 re: fclean all
 	@echo "$(GREEN)Recompilation successfully done!$(NC)"

@@ -11,7 +11,7 @@
 # include <sys/types.h>
 # include <unistd.h>
 
-# define BUF_SIZE 120000 * 1000
+# define BUF_SIZE 190000 * 1000
 
 int filedescriptor (void);
 
