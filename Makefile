@@ -1,12 +1,13 @@
 NAME		= workshop
 
 CC			= cc
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -g
 
 SRC_PATH 	= src
 OBJ_PATH 	= obj
 
-SRC			= 	main.c
+SRC			= 	main.c \
+				filedescriptor.c
 
 SRCS 		= $(addprefix $(SRC_PATH)/, $(SRC))
 OBJ 		= $(SRC:.c=.o)
