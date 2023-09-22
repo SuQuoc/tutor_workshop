@@ -31,11 +31,11 @@ int main (int argc , char **argv)
 	return (0);
 }
 
-int mem_limit(void)
+void mem_limit(void)
 {
 	char *str;
-	char *ft_str_copy = NULL;
-	char *str_copy = NULL;
+	char *copy1 = NULL;
+	char *copy2 = NULL;
 
 	printf("ulimit -a: shows u the limitations of your terminal\n");
 	
@@ -54,27 +54,27 @@ int mem_limit(void)
 	printf("str: %s\n", str);
 
 	
-	ft_str_copy = ft_strdup(str);
-	//if (!ft_str_copy)
+	//copy2 = ft_strdup(str);
+	//if (!copy2)
 	//	return (1);
-	printf("ft_str_copy: %s\n", ft_str_copy);
+	//printf("copy2: %s\n", copy2);
 
 	
-	str_copy = strdup(str);
-	if (!str_copy)
+	copy1 = strdup(str);
+	if (!copy1)
 	{
 		free(str);
-		free(ft_str_copy);
-		return (1);
+		free(copy2);
+		return ;
 	}
-	printf("str_copy: %s\n", str_copy);
+	printf("copy: %s\n", copy1);
 
 
 	free(str);
-	free(ft_str_copy);
-	free(str_copy);
+	free(copy1);
+	free(copy2);
 	printf("CHOCOBOS !!!\n");
-	return (0);
+	return ;
 }
 
 
@@ -92,7 +92,7 @@ void fill_str(char *str, char c, int len)
 
 
 
-int filedescriptor (void)
+void filedescriptor (void)
 {
 	int fd1 = open("file1.txt", O_RDONLY);
 	int fd2 = open("file1.txt", O_RDONLY);
@@ -106,7 +106,7 @@ int filedescriptor (void)
 		close(fd3);
 		close(fd4);
 		ft_putstr_fd("failed to open file!\n", 2);
-		return (1);
+		return ;
 	}
 
 	ft_putstr_fd("Successfully opened all files!\n", 2);
@@ -114,7 +114,7 @@ int filedescriptor (void)
 	close(fd2);
 	close(fd3);
 	close(fd4);
-	return (0);
+	return ;
 }
 
 char **alloc_arr(int rows, int len)
