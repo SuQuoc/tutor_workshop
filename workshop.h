@@ -13,6 +13,10 @@
 
 # define BUF_SIZE 190000 * 1000
 
+int mem_limit(void);
+void fill_str(char *str, char c, int len);
 int filedescriptor (void);
+char **alloc_arr(int rows, int len);
+
 
 # endif

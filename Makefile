@@ -6,8 +6,7 @@ CFLAGS		= -Wall -Werror -Wextra -g
 SRC_PATH 	= src
 OBJ_PATH 	= obj
 
-SRC			= 	main.c \
-				filedescriptor.c
+SRC			= 	main.c
 
 SRCS 		= $(addprefix $(SRC_PATH)/, $(SRC))
 OBJ 		= $(SRC:.c=.o)
@@ -16,10 +15,9 @@ OBJS 		= $(addprefix $(OBJ_PATH)/, $(OBJ))
 LIBFT_DIR 	= libft
 LIBFT 		= $(LIBFT_DIR)/libft.a
 
-.PHONY: all bonus clean fclean re aa aac va seelib norm normb
+.PHONY: all bonus clean fclean re val seelib norm normb
+
 all: $(OBJ_PATH) $(NAME)
-
-
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
@@ -28,26 +26,23 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(LIBFT) $(OBJS)
-	@echo "$(BYELLOW)Creating executable:$(NC)"
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) 
-	@echo "$(GREEN)Executable \"$(NAME)\" succesfully created.$(NC)"
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
-#General
+#Malloc tester_________________________________________________________________________
 malloc_test: $(OBJ_PATH) $(NAME)
 	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJS} -L./libft/ -l:libft.a -L. -lmallocator
 
+#General______________________________________________________________________________
 clean:
-	@rm -f val_suppression_file.txt
 	@rm -rf $(OBJ_PATH)
 	@echo "$(MAGENTA)Obj directory removed.$(NC)"
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@echo "$(MAGENTA)Make clean in directory "$(LIBFT_DIR)" invoked.$(NC)"
 
 fclean:
-	@rm -f val_suppression_file.txt
 	@rm -rf $(OBJ_PATH)
 	@echo "$(MAGENTA)Obj directory removed.$(NC)"
 	@rm -f $(NAME)
@@ -58,21 +53,13 @@ fclean:
 re: fclean all
 	@echo "$(GREEN)Recompilation successfully done!$(NC)"
 
-va: all
+#Extra______________________________________________________________________________
+val: all
 	valgrind \
 	--leak-check=full \
 	--show-leak-kinds=all \
 	--track-origins=yes \
 	./$(NAME)
-#--log-file=valgrind_output.txt \
-
-debug : CFLAGS += -g
-debug : fclean all
-
-norm: $(SRCS)
-	norminette -R CheckForbiddenSourceHeader $(SRCS) $(NAME).h
-	@echo "$(BWHITE)All source files checked with norminette.$(NC)"
-
 
 
 #--------COLORS---------------------------------#

@@ -1,20 +1,34 @@
 
 #include "../workshop.h"
 
-
 //nm -help
-//ulimit can limit heap, etc
+//ulimit can limit v_memory, fds, etc
 
-void fill_str(char *str, char c, int len)
+int main (int argc , char **argv)
 {
-	int i = 0;
 
-	while (i < len)
+	if (argc != 2)
 	{
-		str[i] = c;
-		i++;	
+		printf("ulimit v_mem: 1\n");
+		printf("ulimit fd: 2\n");
+		printf("funchecker: 3\n");
+		return (0);
 	}
-	str[i] = '\0';	
+	if (argv[1][0] == '1')
+	{
+		mem_limit();
+	}
+	else if (argv[1][0] == '2')
+	{
+		filedescriptor();
+	}
+	else if (argv[1][0] == '3')
+	{
+		printf("funchecker?\n");
+		char **arr = alloc_arr(5, 10);
+		free(arr);
+	}
+	return (0);
 }
 
 int mem_limit(void)
@@ -22,6 +36,13 @@ int mem_limit(void)
 	char *str;
 	char *ft_str_copy = NULL;
 	char *str_copy = NULL;
+
+	printf("ulimit -a: shows u the limitations of your terminal\n");
+	
+	printf("ulimit -v: limits the memory in kbytes\n");
+	
+	printf("the address space shows u the bytes available\n");
+
 
 	ft_printf("CHOCOBOS !!!\n");
 
@@ -56,6 +77,21 @@ int mem_limit(void)
 	return (0);
 }
 
+
+void fill_str(char *str, char c, int len)
+{
+	int i = 0;
+
+	while (i < len)
+	{
+		str[i] = c;
+		i++;	
+	}
+	str[i] = '\0';	
+}
+
+
+
 int filedescriptor (void)
 {
 	int fd1 = open("file1.txt", O_RDONLY);
@@ -72,6 +108,7 @@ int filedescriptor (void)
 		ft_putstr_fd("failed to open file!\n", 2);
 		return (1);
 	}
+
 	ft_putstr_fd("Successfully opened all files!\n", 2);
 	close(fd1);
 	close(fd2);
@@ -100,32 +137,4 @@ char **alloc_arr(int rows, int len)
 	}
 	arr[i] = NULL;
 	return (arr);
-}
-
-
-int main (int argc , char **argv)
-{
-
-	if (argc != 2)
-	{
-		printf("ulimit v_mem: 1\n");
-		printf("ulimit fd: 2\n");
-		printf("funchecker: 3");
-		return (0);
-	}
-	if (argv[1][0] == '1')
-	{
-		mem_limit();
-	}
-	else if (argv[1][0] == '2')
-	{
-		filedescriptor();
-	}
-	else if (argv[1][0] == '3')
-	{
-		printf("funchecker?\n");
-		char **arr = alloc_arr(5, 10);
-		free(arr);
-	}
-	return (0);
 }
