@@ -9,7 +9,7 @@ int main (int argc , char **argv)
 
 	if (argc != 2)
 	{
-		printf("ulimit v_mem: 1\n");
+		printf("ulimit memory: 1\n");
 		printf("ulimit fd: 2\n");
 		printf("funchecker: 3\n");
 		return (0);
@@ -25,79 +25,67 @@ int main (int argc , char **argv)
 	else if (argv[1][0] == '3')
 	{
 		printf("funchecker?\n");
-		char **arr = alloc_arr(5, 10);
+		char **arr = alloc_arr(10, 10);
 		free(arr);
 	}
 	return (0);
 }
 
+//printf("ulimit -a: shows u the limitations of your terminal\n");
+//printf("ulimit -v: limits the memory in kbytes (address space)\n");
+
 void mem_limit(void)
 {
-	char *str;
+	printf("Buffer size: %d kbytes\n", BUF_SIZE / 1024);//debugging
+	
+	char *str = NULL;
 	char *copy1 = NULL;
 	char *copy2 = NULL;
 
-	printf("ulimit -a: shows u the limitations of your terminal\n");
-	
-	printf("ulimit -v: limits the memory in kbytes\n");
-	
-	printf("the address space shows u the bytes available\n");
-
-
-	ft_printf("CHOCOBOS !!!\n");
-
-	printf("buffer Size: %d\n", BUF_SIZE);
 	str = (char *)malloc(sizeof(char) * BUF_SIZE);
-	//if (!str)
-	//	return (1);
-	fill_str(str, 'a', 10);
-	printf("str: %s\n", str);
-
-	
-	//copy2 = ft_strdup(str);
-	//if (!copy2)
-	//	return (1);
-	//printf("copy2: %s\n", copy2);
-
-	
-	copy1 = strdup(str);
-	if (!copy1)
-	{
-		free(str);
-		free(copy2);
+	if (!str)
 		return ;
-	}
-	printf("copy: %s\n", copy1);
+	fill_str(str, "1 CHOCOBO !!!\n");
+	printf("str: %s\n", str);
+	
+	
+	copy1 = (char *)malloc(sizeof(char) * BUF_SIZE);
+	fill_str(copy1, "2 CHOCOBOS !!!\n");
+	printf("copy1: %s\n", copy1);
+	
 
+	copy2 = (char *)malloc(sizeof(char) * BUF_SIZE);
+	if (!copy2)
+		return ;
+	fill_str(copy2, "3 CHOCOBOS !!!\n");
+	printf("copy2: %s\n", copy2);
 
-	free(str);
-	free(copy1);
-	free(copy2);
-	printf("CHOCOBOS !!!\n");
 	return ;
 }
 
 
-void fill_str(char *str, char c, int len)
+void fill_str(char *dest, char *src)
 {
 	int i = 0;
 
-	while (i < len)
+	if (src == NULL)
+		return ;
+	while (src[i])
 	{
-		str[i] = c;
+		dest[i] = src[i];
 		i++;	
 	}
-	str[i] = '\0';	
+	dest[i] = '\0';	
 }
 
 
 
 void filedescriptor (void)
 {
-	int fd1 = open("file1.txt", O_RDONLY);
-	int fd2 = open("file1.txt", O_RDONLY);
-	int fd3 = open("file1.txt", O_RDONLY);
-	int fd4 = open("file1.txt", O_RDONLY);
+	int fd1 = open("README.md", O_RDONLY);
+	int fd2 = open("README.md", O_RDONLY);
+	int fd3 = open("README.md", O_RDONLY);
+	int fd4 = open("README.md", O_RDONLY);
 
 	if (fd1 == -1 || fd2 == -1 || fd3 == -1 || fd4 == -1)
 	{
@@ -137,4 +125,18 @@ char **alloc_arr(int rows, int len)
 	}
 	arr[i] = NULL;
 	return (arr);
+}
+
+
+
+void free_2d_arr(char **arr, int rows)
+{
+	int i = 0;
+
+	while (i < rows)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }

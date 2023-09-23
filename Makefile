@@ -15,7 +15,7 @@ OBJS 		= $(addprefix $(OBJ_PATH)/, $(OBJ))
 LIBFT_DIR 	= libft
 LIBFT 		= $(LIBFT_DIR)/libft.a
 
-.PHONY: all bonus clean fclean re val seelib norm normb
+.PHONY: all  clean fclean re val
 
 all: $(OBJ_PATH) $(NAME)
 
