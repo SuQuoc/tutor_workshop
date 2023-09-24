@@ -53,10 +53,8 @@ static char	**makewords(char **arr, int substrs, char const *s, char c)
 	int		start;
 	int		end;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = -1;
 	start = 0;
 	end = 0;
 	while (i < substrs - 1)
@@ -66,8 +64,8 @@ static char	**makewords(char **arr, int substrs, char const *s, char c)
 		arr[i] = ft_substr(s, start, end - start);
 		if (arr[i] == NULL)
 		{
-			while (++j < i)
-				free(arr[j]);
+			//while (--i >= 0)
+			//	free(arr[i]);
 			return (free(arr), NULL);
 		}
 		start = end;

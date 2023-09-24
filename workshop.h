@@ -16,7 +16,9 @@ void mem_limit(void);
 void fill_str(char *dest, char *src);
 void filedescriptor (void);
 char **alloc_arr(int rows, int len);
-void free_2d_arr(char **arr, int rows);
+void free_2d_arr(char **arr);
+void fun_and_malloc(void);
+
 
 
 

@@ -1,38 +1,56 @@
 
 #include "../workshop.h"
 
-//nm -help
-//ulimit can limit v_memory, fds, etc
 
 int main (int argc , char **argv)
 {
 
 	if (argc != 2)
 	{
-		printf("ulimit memory: 1\n");
-		printf("ulimit fd: 2\n");
+		printf("ulimit fd: 1\n");
+		printf("ulimit memory: 2\n");
 		printf("funchecker: 3\n");
 		return (0);
 	}
 	if (argv[1][0] == '1')
 	{
-		mem_limit();
+		filedescriptor();
 	}
 	else if (argv[1][0] == '2')
 	{
-		filedescriptor();
+		mem_limit();
 	}
 	else if (argv[1][0] == '3')
 	{
-		printf("funchecker?\n");
-		char **arr = alloc_arr(10, 10);
-		free(arr);
+		fun_and_malloc();
 	}
 	return (0);
 }
 
-//printf("ulimit -a: shows u the limitations of your terminal\n");
-//printf("ulimit -v: limits the memory in kbytes (address space)\n");
+void filedescriptor (void)
+{
+	int fd1 = open("README.md", O_RDONLY);
+	int fd2 = open("README.md", O_RDONLY);
+	int fd3 = open("README.md", O_RDONLY);
+	int fd4 = open("README.md", O_RDONLY);
+
+	if (fd1 == -1 || fd2 == -1 || fd3 == -1 || fd4 == -1)
+	{
+		close(fd1);
+		close(fd2);
+		close(fd3);
+		close(fd4);
+		ft_putstr_fd("failed to open file!\n", 2);
+		return ;
+	}
+
+	ft_putstr_fd("Successfully opened all files!\n", 2);
+	close(fd1);
+	close(fd2);
+	close(fd3);
+	close(fd4);
+	return ;
+}
 
 void mem_limit(void)
 {
@@ -60,6 +78,10 @@ void mem_limit(void)
 	fill_str(copy2, "3 CHOCOBOS !!!\n");
 	printf("copy2: %s\n", copy2);
 
+
+	free(str);
+	free(copy1);
+	free(copy2);
 	return ;
 }
 
@@ -79,33 +101,32 @@ void fill_str(char *dest, char *src)
 }
 
 
-
-void filedescriptor (void)
+void fun_and_malloc(void)
 {
-	int fd1 = open("README.md", O_RDONLY);
-	int fd2 = open("README.md", O_RDONLY);
-	int fd3 = open("README.md", O_RDONLY);
-	int fd4 = open("README.md", O_RDONLY);
+	printf("funcheck and ft_mallocator\n");
+	char **arr = ft_split("Hello and weclome to the workshop.", ' ');
+	//if (!arr)
+	//	return ;
+	//do smth with arr
+	free_2d_arr(arr);
 
-	if (fd1 == -1 || fd2 == -1 || fd3 == -1 || fd4 == -1)
-	{
-		close(fd1);
-		close(fd2);
-		close(fd3);
-		close(fd4);
-		ft_putstr_fd("failed to open file!\n", 2);
-		return ;
-	}
-
-	ft_putstr_fd("Successfully opened all files!\n", 2);
-	close(fd1);
-	close(fd2);
-	close(fd3);
-	close(fd4);
-	return ;
 }
 
-char **alloc_arr(int rows, int len)
+
+void 	free_2d_arr(char **arr)
+{
+	int i = 0;
+
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+
+/* char **alloc_arr(int rows, int len)
 {
 	char **arr;
 	int i;
@@ -125,18 +146,4 @@ char **alloc_arr(int rows, int len)
 	}
 	arr[i] = NULL;
 	return (arr);
-}
-
-
-
-void free_2d_arr(char **arr, int rows)
-{
-	int i = 0;
-
-	while (i < rows)
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
+} */
