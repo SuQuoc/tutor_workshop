@@ -13,11 +13,13 @@
 # define BUF_SIZE 200 * 1024
 
 void mem_limit(void);
-void fill_str(char *dest, char *src);
 void filedescriptor (void);
 char **alloc_arr(int rows, int len);
-void free_2d_arr(char **arr);
 void fun_and_malloc(void);
+
+void fill_str(char *dest, char *src);
+void free_2d_arr(char **arr);
+
 
 
 
