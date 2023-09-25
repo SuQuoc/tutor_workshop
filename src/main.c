@@ -90,11 +90,8 @@ void mem_limit(void)
 
 void fun_and_malloc(void)
 {
-	printf("funcheck and ft_mallocator\n");
+	printf("funcheck\n");
 	char **arr = ft_split("Hello and weclome to the workshop.", ' ');
-	//if (!arr)
-	//	return ;
 	//do smth with arr
 	free_2d_arr(arr);
-
 }

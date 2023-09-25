@@ -6,7 +6,7 @@
 /*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:20:58 by qtran             #+#    #+#             */
-/*   Updated: 2022/12/30 18:46:06 by qtran            ###   ########.fr       */
+/*   Updated: 2023/09/25 16:39:32 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static char	**makewords(char **arr, int substrs, char const *s, char c)
 		arr[i] = ft_substr(s, start, end - start);
 		if (arr[i] == NULL)
 		{
-			//while (--i >= 0)
-			//	free(arr[i]);
 			return (free(arr), NULL);
 		}
 		start = end;
