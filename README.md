@@ -10,5 +10,3 @@ https://phoenixnap.com/kb/ulimit-linux-command
 #funcheck
 https://github.com/tmatis/funcheck
 
-#ft_mallocator
-https://github.com/tmatis/ft_mallocator
